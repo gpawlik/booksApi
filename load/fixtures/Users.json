@@ -1,0 +1,30 @@
+{
+  "results": [{
+    "firstName": "Gudmund Nils",
+    "lastName": "Theodor",
+    "username": "gudmund",
+    "email": "gnils@gmail.com",
+    "location": "Oslo, Norway",
+    "password": "1234",
+    "interests": [],
+    "isAdmin": true
+  }, {
+    "firstName": "Danijel",
+    "lastName": "Nebojša",
+    "username": "daniel11",
+    "email": "daniel11@gmail.com",
+    "location": "Belgarde, Serbia",
+    "password": "1234",
+    "interests": [],
+    "isAdmin": false
+  }, {
+    "firstName": "Thibault",
+    "lastName": "Évariste",
+    "username": "thibault123",
+    "email": "thibault123@gmail.com",
+    "location": "Lyon, France",
+    "password": "1234",
+    "interests": [],
+    "isAdmin": false
+  }]
+}

@@ -1,0 +1,18 @@
+{
+  "results": [{
+    "title": "Book no.1",
+    "author": "Marcel Proust",
+    "ISBN": "123-456-789",
+    "pictureUrl": ""
+  }, {
+    "title": "Book no.2",
+    "author": "Friedrich Nietsche",
+    "ISBN": "456-123-789",
+    "pictureUrl": ""
+  }, {
+    "title": "Book no.3",
+    "author": "Herman Hesse",
+    "ISBN": "456-567-789",
+    "pictureUrl": ""
+  }]
+}
