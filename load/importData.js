@@ -12,7 +12,20 @@ import { results as books } from './fixtures/Books.json';
 
 const usersImport = () => {
   return users.reduce((memo, data) => {
-    const { username, email, firstName, lastName, password, location, interests, isAdmin, createdAt = Date.now(), updatedAt = Date.now() } = data;
+    const {
+      username,
+      email,
+      firstName,
+      lastName,
+      password,
+      location,
+      interests,
+      isAdmin,
+      allowEmailNotifications,
+      allowPushNotifications,
+      createdAt = Date.now(),
+      updatedAt = Date.now()
+    } = data;
     const newUser = new User({
       password: bcrypt.hashSync(password, 10),
       username,
@@ -22,6 +35,8 @@ const usersImport = () => {
       location,
       interests,
       isAdmin,
+      allowEmailNotifications,
+      allowPushNotifications,
       createdAt,
       updatedAt
     });
@@ -55,8 +70,9 @@ const leftingsImport = () => {
 
 const booksImport = () => {
   return books.reduce((memo, data) => {
-    const { title, author, ISBN, pictureUrl, createdAt = Date.now(), updatedAt = Date.now() } = data;
+    const { bookId, title, author, ISBN, pictureUrl, createdAt = Date.now(), updatedAt = Date.now() } = data;
     const newBook = new Book({
+      bookId,
       title,
       author,
       ISBN,

@@ -7,6 +7,8 @@
     "location": "Oslo, Norway",
     "password": "1234",
     "interests": [],
+    "allowEmailNotifications": true,
+    "allowPushNotifications": true,
     "isAdmin": true
   }, {
     "firstName": "Danijel",
@@ -16,6 +18,8 @@
     "location": "Belgarde, Serbia",
     "password": "1234",
     "interests": [],
+    "allowEmailNotifications": true,
+    "allowPushNotifications": false,
     "isAdmin": false
   }, {
     "firstName": "Thibault",
@@ -25,6 +29,8 @@
     "location": "Lyon, France",
     "password": "1234",
     "interests": [],
+    "allowEmailNotifications": false,
+    "allowPushNotifications": true,
     "isAdmin": false
   }]
 }

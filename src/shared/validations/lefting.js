@@ -1,17 +1,14 @@
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
-const validateInput = ({ description, bookId, location }) => {
+const validateInput = ({ bookId, location }) => {
   let errors = {};
 
-  if (Validator.isEmpty(description)) {
-    errors.description = 'Enter a description';
-  }
   if (Validator.isEmpty(bookId)) {
-    errors.bookId = 'Enter a bookId';
+    errors.bookId = 'BookId is missing';
   }
   if (Validator.isEmpty(location)) {
-    errors.location = 'Enter a location';
+    errors.location = 'Location is missing';
   }
 
   return {

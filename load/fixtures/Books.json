@@ -1,18 +1,27 @@
 {
   "results": [{
-    "title": "Book no.1",
+    "bookId": "123",
+    "title": "El millor dels mons",
+    "author": "Quim Monzó",
+    "ISBN": "123-456-789",
+    "pictureUrl": "http://4.bp.blogspot.com/-ZLHIPEdb9ho/Ueg-g_JTDqI/AAAAAAAAAWA/O4_fIlACCOA/s1600/photo4.JPG"
+  }, {
+    "bookId": "321",
+    "title": "In search of Lost Time",
     "author": "Marcel Proust",
     "ISBN": "123-456-789",
-    "pictureUrl": ""
+    "pictureUrl": "https://s-media-cache-ak0.pinimg.com/originals/44/1a/0f/441a0fb41fc73e9b723e17cac3e05349.jpg"
   }, {
-    "title": "Book no.2",
+    "bookId": "231",
+    "title": "The Will to Power",
     "author": "Friedrich Nietsche",
     "ISBN": "456-123-789",
-    "pictureUrl": ""
+    "pictureUrl": "http://www.kaboom.news/wp-content/uploads/2016/11/AM-0ccf3e48168025d4e02f6e0dca209413.png"
   }, {
-    "title": "Book no.3",
+    "bookId": "312",
+    "title": "Steppenwolf",
     "author": "Herman Hesse",
     "ISBN": "456-567-789",
-    "pictureUrl": ""
+    "pictureUrl": "https://scontent-cdg2-1.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/16230947_489792524478280_1822973614379499520_n.jpg"
   }]
 }

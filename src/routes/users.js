@@ -80,7 +80,7 @@ router.get('/:identifier', function (req, res) {
         { email: identifier }
       ]
     })
-    .select('_id username email firstName lastName location interests isAdmin createdAt')
+    .select('_id username email firstName lastName location interests isAdmin allowEmailNotifications allowPushNotifications createdAt')
     .then(user => {
       res.json({ user });
     });
@@ -89,24 +89,59 @@ router.get('/:identifier', function (req, res) {
 // Update the user with the specific id
 // TODO: restrict by self-user
 router.put('/:user_id', (req, res) => {
-  User.findById(req.params.user_id, (err, user) => {
-    const { username, email, location, interests } = req.body;
+  if(req.params.user_id === 'undefined') {
+    return res.send({ message: 'User is undefined.' });
+  }
+  User.findById(req.params.user_id).then(user => {
+    const {
+      username = user.username,
+      email = user.email,
+      location = user.location,
+      interests = user.interests,
+      allowEmailNotifications = user.allowEmailNotifications,
+      allowPushNotifications = user.allowPushNotifications
+    } = req.body;
 
-    if (err) {
-      res.send(err);
-    }
     user.username = username;
     user.email = email;
     user.location = location;
     user.interests = interests;
+    user.allowEmailNotifications = allowEmailNotifications;
+    user.allowPushNotifications = allowPushNotifications;
 
     user.save((saveErr, savedUser) => {
       if (saveErr) {
         res.send(saveErr);
       }
-      console.log(user);
-      res.json({ message: 'User updated!', user: savedUser });
+      // TODO: make consistent with SELECT data structure
+      const {
+        _id,
+        username,
+        firstName,
+        lastName,
+        email,
+        location,
+        interests,
+        allowEmailNotifications,
+        allowPushNotifications
+      } = savedUser;
+      const userData = {
+        _id,
+        username,
+        firstName,
+        lastName,
+        email,
+        location,
+        interests,
+        allowEmailNotifications,
+        allowPushNotifications
+      };
+
+      res.json({ message: 'User updated!', user: userData });
     });
+  })
+  .catch(err => {
+    return res.send(err);
   });
 });
 

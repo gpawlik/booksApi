@@ -1,18 +1,31 @@
 {
   "results": [{
-    "description": "Lefting no. 1",
+    "comment": "Lefting no. 1",
     "bookId": "123",
+    "pictureUrl": "",
     "location": "Barcelona, Spain",
-    "status": "active"
+    "status": "active",
+    "userId": "123"
   }, {
-    "description": "Lefting no. 2",
-    "bookId": "234",
+    "comment": "Lefting no. 2",
+    "bookId": "321",
+    "pictureUrl": "",
     "location": "Madrid, Spain",
-    "status": "taken"
+    "status": "taken",
+    "userId": "123"
   }, {
-    "description": "Lefting no. 3",
-    "bookId": "123",
+    "comment": "Lefting no. 3",
+    "bookId": "231",
+    "pictureUrl": "",
+    "location": "Madrid, Spain",
+    "status": "taken",
+    "userId": "123"
+  }, {
+    "comment": "Lefting no. 4",
+    "bookId": "312",
+    "pictureUrl": "",
     "location": "Warsaw, Poland",
-    "status": "active"
+    "status": "active",
+    "userId": "123"
   }]
 }

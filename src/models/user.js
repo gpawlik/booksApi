@@ -9,6 +9,8 @@ const UserSchema = new Schema({
 	password: String,
 	location: String,
 	interests: Array,
+	allowEmailNotifications: Boolean,
+	allowPushNotifications: Boolean,
 	createdAt: Date,
 	updatedAt: {
 		type: Date,

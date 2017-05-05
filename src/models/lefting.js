@@ -1,9 +1,11 @@
 import mongoose, { Schema } from 'mongoose';
 
 const LeftingSchema = new Schema({
-  description: String,
+  comment: String,
   bookId: String,
+  userId: String,
   location: String,
+  pictureUrl: String,
   status: String,
   createdAt: Date,
   updatedAt: {
