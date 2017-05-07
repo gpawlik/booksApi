@@ -6,47 +6,17 @@ import validateInput from '../shared/validations/lefting';
 
 let router = express.Router();
 
-// Create an lefting
-router.post('/', function (req, res) {
-
-  const { errors, isValid } = validateInput(req.body);
-
-  if (isValid) {
-    const { comment, bookId, userId, location, pictureUrl } = req.body;
-    const newLefting = new Lefting({
-      bookId,
-      userId,
-      comment,
-      location,
-      pictureUrl,
-      createdAt: Date.now()
-    });
-
-    newLefting.save()
-      .then(lefting => res.status(201).json({
-        message: 'Lefting created!',
-        lefting
-      }))
-      .catch(error => res.status(500).json({
-        error
-      }));
-  } else {
-    res.status(400).json(errors);
-  }
-
-});
-
 router.get('/', (req, res) => {
   Lefting
     .find()
     .limit(20)
     .sort({ createdAt: 1 })
-    .exec((err, leftings) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.json(leftings);
-      }
+    .exec()
+    .then(result => {
+      res.json(result);
+    })
+    .catch(err => {
+      res.send(err);
     });
 });
 
@@ -90,6 +60,8 @@ router.get('/:leftingId', function (req, res) {
       .then(book => {
         return res.json({
           _id: result._id,
+          pictureUrl: result.pictureUrl,
+          locationString: result.locationString,
           location: result.location,
           createdAt: result.createdAt,
           book
@@ -99,6 +71,26 @@ router.get('/:leftingId', function (req, res) {
         message: 'Error occured:',
         error
       }));
+  }
+});
+
+router.post('/', function (req, res) {
+  const { claim, book, location } = req.body;
+  const { errors, isValid } = validateInput(claim);
+
+  if (isValid) {
+    createBook(book)
+      .then(bookId => {
+        return createLefting(Object.assign({}, claim, { location }, { bookId }));
+      })
+      .then(() => res.status(201).json({
+        message: 'Lefting created!'
+      }))
+      .catch(error => res.status(500).json({
+        error
+      }));
+  } else {
+    res.status(400).json(errors);
   }
 });
 
@@ -119,8 +111,6 @@ router.delete('/:leftingId', adminRestricted, function (req, res) {
   }
 });
 
-// Update the lefting with the specific id
-// TODO: organize it more cleverly
 router.put('/:lefting_id', adminRestricted, function (req, res) {
   const { description, bookId, location } = req.body;
   const { lefting_id } = req.params;
@@ -149,6 +139,64 @@ router.put('/:lefting_id', adminRestricted, function (req, res) {
       res.send(err);
     });
 });
+
+function createLefting({
+  comment,
+  bookId,
+  userId,
+  locationString,
+  location,
+  pictureUrl
+}) {
+  const newLefting = new Lefting({
+    bookId,
+    userId,
+    comment,
+    locationString,
+    location,
+    pictureUrl,
+    createdAt: Date.now()
+  });
+
+  return newLefting.save();
+}
+
+function createBook({
+  bookId,
+  title,
+  description,
+  author,
+  ISBN,
+  imageUrl,
+  publishDate,
+  rating
+}) {
+  return Book.find({ bookId })
+    .limit(1)
+    .then(book => {
+      if(book.length) {
+        return book[0];
+      } else {
+        const newBook = new Book({
+          bookId,
+          title,
+          description,
+          author,
+          ISBN,
+          imageUrl,
+          publishDate,
+          rating,
+          createdAt: Date.now()
+        });
+
+        return newBook.save();
+      }
+    })
+    .then(book => book.bookId)
+    .catch(err => {
+      console.log('Error', err);
+    });
+}
 
 function getLeftings() {
   return Lefting
@@ -195,6 +243,7 @@ function mergeLeftingsAndBooks(leftings, books) {
     return {
       _id: lefting._id,
       pictureUrl: lefting.pictureUrl,
+      locationString: lefting.locationString,
       location: lefting.location,
       createdAt: lefting.createdAt,
       book: books.find(item => item.bookId === lefting.bookId)

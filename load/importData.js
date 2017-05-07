@@ -51,11 +51,13 @@ const usersImport = () => {
 
 const leftingsImport = () => {
   return leftings.reduce((memo, data) => {
-    const { description, bookId, location, createdAt = Date.now(), updatedAt = Date.now() } = data;
+    const { description, bookId, pictureUrl, locationString, location, createdAt = Date.now(), updatedAt = Date.now() } = data;
     const newLefting = new Lefting({
       description,
       bookId,
+      pictureUrl,
       location,
+      locationString,
       createdAt,
       updatedAt
     });
@@ -70,13 +72,15 @@ const leftingsImport = () => {
 
 const booksImport = () => {
   return books.reduce((memo, data) => {
-    const { bookId, title, author, ISBN, pictureUrl, createdAt = Date.now(), updatedAt = Date.now() } = data;
+    const { bookId, title, author, ISBN, imageUrl, publishDate, rating, createdAt = Date.now(), updatedAt = Date.now() } = data;
     const newBook = new Book({
       bookId,
       title,
       author,
       ISBN,
-      pictureUrl,
+      imageUrl,
+      publishDate,
+      rating,
       createdAt,
       updatedAt
     });

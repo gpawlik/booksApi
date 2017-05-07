@@ -6,7 +6,9 @@ const BookSchema = new Schema({
   description: String,
   author: String,
   ISBN: String,
-  pictureUrl: String,
+  imageUrl: String,
+  publishDate: Number,
+  rating: Number,
   createdAt: Date,
   updatedAt: {
     type: Date,
